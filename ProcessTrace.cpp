@@ -6,12 +6,10 @@
  */
 
 #include "ProcessTrace.h"
-#include <iostream> //cout
 #include <sstream> //istringstream
 #include <algorithm> //transform (putting our command in lowercase)
 
-using std::cerr;
-using std::cout;
+using namespace std;
 
 ProcessTrace::ProcessTrace(const std::string &file_name) {
     string line; //line we will send to Execute()
@@ -38,12 +36,12 @@ ProcessTrace::~ProcessTrace() {
 void ProcessTrace::Execute(string line){
     /* Cannot use istringstream to read uint8_t --
     * uint8_t is treated as unsigned char and will be read
-    * as such. Must use unsigned ints, or uint16_t
+    * as such. Must use unsigned ints, or in our case: uint16_t
     * https://stackoverflow.com/questions/25277218/how-to-read-numeric-data-as-uint8-t/25277376 */
     
     istringstream tokenized (line); //to parse our string
     string command; //stores command name
-    uint16_t address; //stores address parameter
+    uint16_t address; //stores address parameter; we must use something larger than uint8_t, and this will work just fine
     uint16_t token; //for reading tokens from istringstream (see note above)
     unsigned int offset; //for adding multiple values to memory
     unsigned int count; //number of times to add a value
