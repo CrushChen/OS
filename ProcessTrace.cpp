@@ -46,9 +46,8 @@ void ProcessTrace::Execute(string line){
     unsigned int offset; //for adding multiple values to memory
     unsigned int count; //number of times to add a value
     
-    transform(command.begin(), command.end(), command.begin(), ::tolower);//puts our string in lowercase
     tokenized >> command;//first word of line should be the command
-    
+    transform(command.begin(), command.end(), command.begin(), ::tolower);//puts our string in lowercase
     
     if(command.compare("alloc") == 0){
         tokenized >> hex >> memorySize; //Get size of memory as hex
